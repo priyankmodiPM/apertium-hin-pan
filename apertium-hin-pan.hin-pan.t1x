@@ -4,14 +4,22 @@
     <def-cat n="nom">
       <cat-item tags="n.*"/>
     </def-cat>
+    <def-cat n="pers">
+      <cat-item tags="prn.pers.*"/>
+    </def-cat>
+    <def-cat n="post">
+      <cat-item tags="post"/>
+    </def-cat>
     <def-cat n="sent">
       <cat-item tags="sent"/>
     </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
-    <def-attr n="a_cas">
+    <def-attr n="a_case">
       <attr-item tags="nom"/>
+      <attr-item tags="gen"/>
+      <attr-item tags="obl"/>
     </def-attr>
   </section-def-attrs>
 
@@ -41,6 +49,29 @@
             </tags>
             <lu>
               <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+    
+    <rule comment="REGLA: PRON POST">
+      <pattern>
+        <pattern-item n="pers"/>
+        <pattern-item n="post"/>
+      </pattern>
+      <action>
+        <let><clip pos="1" side="tl" part="a_case"/><lit-tag v="obl"/></let>
+        <out>
+          <chunk name="pers" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
             </lu>
           </chunk>
         </out>
